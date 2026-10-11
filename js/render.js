@@ -32,7 +32,7 @@
     { id: 'projects',   label: '프로젝트',     render: renderProjects,  when: function () { return has(R.projects) || has(R.otherProjects); } },
     { id: 'experience', label: '경력',        render: renderExperience, when: function () { return has(R.experience); } },
     { id: 'skills',     label: '기술 스택',    render: renderSkills,     when: function () { return has(R.skills); } },
-    { id: 'awards',     label: '자격증 · 수상', render: renderAwards,     when: function () { return has(R.certifications) || has(R.awards); } },
+    { id: 'certs',      label: certsLabel(),  render: renderCerts,      when: function () { return certGroups().length > 0; } },
     { id: 'activities', label: '활동',        render: renderActivities, when: function () { return has(R.activities); } },
     { id: 'education',  label: '학력',        render: renderEducation,  when: function () { return has(R.education); } },
   ].filter(function (s) { return !s.when || s.when(); });
@@ -116,7 +116,7 @@
   /*
    * One entry shape for every section.
    *   left : period + label
-   *   right: title (+ aside) · meta · text · [더보기 → details + Stack] · links
+   *   right: title (+ aside) · meta · text · figures (label/value rows) · note · [더보기 → details + Stack] · links
    * opts.compact → tighter spacing (other projects, awards, education)
    * opts.level   → heading level for the title (h3 default)
    */
@@ -159,6 +159,12 @@
           '</' + h + '>' +
           (e.meta ? '<p class="entry__meta">' + rich(e.meta) + '</p>' : '') +
           (e.text ? '<p class="entry__text">' + rich(e.text) + '</p>' : '') +
+          (has(e.figures)
+            ? '<dl class="figs">' + e.figures.map(function (f) {
+                return '<div class="figs__row"><dt>' + esc(f.label) + '</dt><dd>' + rich(f.value) + '</dd></div>';
+              }).join('') + '</dl>'
+            : '') +
+          (e.note ? '<p class="entry__note">' + rich(e.note) + '</p>' : '') +
           stack +
           foot +
         '</div>' +
@@ -193,11 +199,19 @@
       }).join('') + '</dl>');
   }
 
-  function renderAwards() {
-    var out = '';
-    if (has(R.awards)) out += '<div class="sub sub--first"><h3 class="sub__title">수상</h3>' + entries(R.awards, { compact: true, level: 'h4' }) + '</div>';
-    if (has(R.certifications)) out += '<div class="sub"><h3 class="sub__title">자격증</h3>' + entries(R.certifications, { compact: true, level: 'h4' }) + '</div>';
-    return section('awards', '자격증 · 수상', out);
+  // 자격증 · 어학 · 수상 share one section; the title lists only the groups that have items
+  function certGroups() {
+    return [['자격증', R.certifications], ['어학', R.languages], ['수상', R.awards]]
+      .filter(function (g) { return has(g[1]); });
+  }
+  function certsLabel() {
+    return certGroups().map(function (g) { return g[0]; }).join(' · ');
+  }
+  function renderCerts() {
+    return section('certs', certsLabel(), certGroups().map(function (g, i) {
+      return '<div class="sub' + (i === 0 ? ' sub--first' : '') + '"><h3 class="sub__title">' + g[0] + '</h3>' +
+        entries(g[1], { compact: true, level: 'h4' }) + '</div>';
+    }).join(''));
   }
 
   function renderActivities() {
@@ -205,7 +219,7 @@
   }
 
   function renderEducation() {
-    return section('education', '학력', entries(R.education, { compact: true }));
+    return section('education', '학력', entries(R.education));
   }
 
   /* ── footer ──────────────────────────────────────────── */

@@ -9,6 +9,8 @@
  *   meta    : 제목 아래 회색 한 줄 (기관명 등)
  *   stack   : 기술 스택 — '더보기' 맨 아래에 'Stack | …' 로 표시 (더보기가 없으면 요약 아래)
  *   text    : 2~3줄 요약 문단 — 핵심 수치는 **두 별표**로 감싸면 굵게 강조
+ *   figures : 항목명 / 값 표 [{ label, value }] (학점 등)
+ *   note    : 표 아래 작은 메모
  *   details : '더보기'를 누르면 펼쳐지는 상세 [{ title, body }] — 인쇄(PDF) 시 자동으로 펼쳐짐
  *   links   : [{ label, href }]
  * 필요 없는 칸은 지우거나 '' / [] 로 두면 화면에서 숨겨집니다.
@@ -18,17 +20,17 @@
 
 window.RESUME = {
   profile: {
-    name: '이준호',
-    nameEn: 'Junho Lee',
+    name: '전준형',
+    nameEn: 'Junhyung Jeon',
     photo: '',                       // 예: 'assets/profile.jpg' (비우면 회색 자리표시)
-    school: '한국대학교',
-    major: '컴퓨터공학과',
-    graduation: '2027년 2월 졸업 예정',
+    school: '경북대학교',
+    major: '컴퓨터학부',
+    graduation: '2027년 2월 졸업 예정',   // 비우면 숨김
     role: '백엔드 개발자',            // 네비게이션 이름 아래 표시
-    email: 'junho@example.com',
+    email: 'knujun0423@gmail.com',
     links: [                         // 이름 아래에 링크로 표시 (이메일은 email 값이 그대로 표시됨)
-      { label: 'GitHub',   href: 'https://github.com/junho' },
-      { label: 'LinkedIn', href: 'https://linkedin.com/in/junho' },
+      { label: 'GitHub',   href: 'https://github.com/junhyung-dev' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/%EC%A4%80%ED%98%95-%EC%A0%84-37b0a23ab/' },
     ],
     updated: '2026.10',
   },
@@ -112,22 +114,37 @@ window.RESUME = {
     { category: 'Tools',    items: 'Git · Jira · Notion · Figma' },
   ],
 
-  awards: [
-    { period: '2025.11', title: '교내 소프트웨어 경진대회 최우수상', meta: '한국대학교 · 바로마켓' },
-    { period: '2024.08', title: '○○ 해커톤 장려상', meta: '24시간 팀 프로젝트' },
+  // 자격증 · 어학 · 수상 — 하나의 섹션 안에 소제목으로 나뉩니다. 비어 있는 그룹은 섹션 제목에서도 빠집니다.
+  certifications: [
+    { period: '2026.06.05', title: 'ADsP', aside: '데이터분석 준전문가', meta: '한국데이터산업진흥원' },
+    { period: '2025.09.19', title: 'SQLD', aside: 'SQL 개발자', meta: '한국데이터산업진흥원' },
   ],
 
-  certifications: [
-    { period: '2025.06', title: '정보처리기사', meta: '한국산업인력공단' },
-    { period: '2024.12', title: 'SQLD', meta: '한국데이터산업진흥원' },
+  languages: [
+    { period: '2026.09', title: 'TOEIC Speaking', meta: 'AL (160)' },
+    { period: '2025.07', title: 'TOEIC', meta: '925' },
   ],
+
+  awards: [],
 
   activities: [
     { period: '2025.01 – 06', label: '800시간', title: '○○ 소프트웨어 아카데미', aside: '백엔드 부트캠프 수료', text: 'Spring 기반 웹 서비스 설계·운영 과정을 수료했습니다.' },
     { period: '2024.03 – 2025.02', label: '운영진', title: '교내 개발 동아리 ○○', text: '주간 코드 리뷰 세션을 기획하고 신입 기수를 멘토링했습니다.' },
   ],
 
+  // figures: 항목명 / 값 표 (학점 등) · note: 표 아래 작은 메모 (예: 주요 과목 성적)
   education: [
-    { period: '2021.03 – 2027.02', label: '졸업 예정', title: '한국대학교 컴퓨터공학과', meta: '학사 · 전공 학점 4.1 / 4.5' },
+    {
+      period: '2021.03 – 2027.02',
+      label: '졸업 예정',
+      title: '경북대학교 컴퓨터학부',
+      meta: '부전공 전자공학부',
+      figures: [
+        { label: '전체 평점', value: '4.25 / 4.5' },
+        { label: '전공 평점', value: '4.29 / 4.5' },
+        { label: '부전공 · 전자공학부', value: '4.23 / 4.5' },
+      ],
+      note: '',                      // 예: '자료구조 A+ · 운영체제 A+ · 데이터베이스 A+'
+    },
   ],
 };

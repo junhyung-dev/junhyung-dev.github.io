@@ -260,6 +260,18 @@ button { font: inherit; color: inherit; }
 }
 .entry__links a:hover { text-decoration-color: var(--color-ink); }
 
+/* figures — label / value rows (grades etc.) */
+.figs { margin-top: var(--space-md); max-width: 32rem; border-top: var(--rule-hair) solid var(--color-rule); }
+.figs__row {
+  display: flex; align-items: baseline; gap: var(--space-sm);
+  padding-block: var(--space-xs);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  font-size: var(--text-sm);
+}
+.figs dt { flex: 1; min-width: 0; color: var(--color-muted); }
+.figs dd { margin: 0; color: var(--color-ink); font-weight: var(--weight-semi); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.entry__note { margin-top: var(--space-xs); max-width: var(--measure); font-size: var(--text-2xs); line-height: 1.7; color: var(--color-muted); }
+
 /* 더보기 */
 .more__toggle {
   display: inline-flex; align-items: center; gap: 0.35em;
@@ -302,7 +314,11 @@ button { font: inherit; color: inherit; }
 .entry--compact { padding-block: var(--space-sm); }
 .entry--compact .entry__main { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-sm); }
 .entry--compact .entry__title { font-size: var(--text-body); font-weight: var(--weight-semi); }
-.entry--compact .entry__meta { margin-top: 0; }
+.entry--compact .entry__meta { margin-top: 0; display: inline-flex; align-items: center; }
+.entry--compact .entry__meta::before {   /* title (+ aside) │ meta */
+  content: ""; flex: none; width: 1px; height: 0.8em; margin-right: var(--space-sm);
+  background: var(--color-rule-2);
+}
 .entry--compact .entry__text { flex-basis: 100%; margin-top: 0; font-size: var(--text-sm); line-height: 1.6; }
 
 @media (min-width: 40rem) {
@@ -368,7 +384,7 @@ button { font: inherit; color: inherit; }
   .entry__side { display: block; }
   .foot { margin-top: var(--space-xl); }
   .more__panel[hidden] { display: block; }
-  .entry, .skills__row, .more__list li, .sec__head { break-inside: avoid; }
+  .entry, .skills__row, .more__list li, .sec__head, .figs { break-inside: avoid; }
   .sec__head, .sub__title { break-after: avoid; }
   .arrow { display: none; }
   a { text-decoration: none !important; }
