@@ -1,0 +1,87 @@
+/* Hallmark · tokens · theme: custom · vibe: "austere document, off-white paper, ink type"
+ * paper: oklch(98.2% 0.004 90) · ink: oklch(19% 0.008 90) · accent: ink (monochrome)
+ * display + body: Pretendard Variable (single family by user choice) · axes: light / system-native / neutral
+ */
+
+:root {
+  /* ── Colour · paper & ink (warm-neutral tint, hue 90) ── */
+  --color-paper:    oklch(98.2% 0.004 90);
+  --color-paper-2:  oklch(95.8% 0.005 90);
+  --color-paper-3:  oklch(92.5% 0.006 90);
+  --color-rule:     oklch(89% 0.006 90);
+  --color-rule-2:   oklch(80% 0.007 90);
+  --color-muted:    oklch(50% 0.008 90);
+  --color-ink-2:    oklch(36% 0.008 90);
+  --color-ink:      oklch(19% 0.008 90);
+
+  /* ── Colour · accent ──
+   * 현재는 무채색(잉크). 색을 넣고 싶으면 아래 4줄만 교체:
+   *   --color-accent: oklch(50% 0.17 262);  --color-accent-soft: oklch(94.5% 0.025 262);
+   *   --color-focus:  oklch(52% 0.21 262);
+   */
+  --color-accent:      var(--color-ink);
+  --color-accent-soft: var(--color-paper-3);
+  --color-accent-ink:  var(--color-paper);
+  --color-focus:       oklch(45% 0.16 262);
+
+  /* ── Type ── */
+  --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+               "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-display: var(--font-body);
+
+  --text-2xs:  0.75rem;    /* 12px — side labels */
+  --text-xs:   0.8125rem;  /* 13px — meta only */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-body: 0.9375rem;  /* 15px — dense resume body */
+  --text-base: 1rem;       /* 16px */
+  --text-md:   1.125rem;   /* 18px */
+  --text-title: 1.0625rem; /* 17px — entry titles */
+  --text-lg:   1.25rem;    /* 20px */
+  --text-xl:   1.1875rem;  /* 19px — identity line */
+  --text-name: clamp(1.875rem, 1.6vw + 1.3rem, 2.5rem);   /* 30–40px  name */
+
+  --weight-light: 300;
+  --weight-body:  400;
+  --weight-mid:   500;
+  --weight-semi:  600;
+  --weight-bold:  700;
+
+  /* ── Space · 4pt scale ── */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+
+  /* ── Shape ── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --rule-hair: 1px;
+
+  /* ── Layout ── */
+  --page-max: 76rem;
+  --rail-w:   10rem;
+  --rail-gap: clamp(2.5rem, 5vw, 5rem);
+  --main-max: 56rem;
+  --meta-col: 8.5rem;
+  --measure:  46rem;
+  --gutter:   clamp(1rem, 4vw, 2.5rem);
+  --bar-h:    3.25rem;   /* mobile top bar */
+  --space-section: clamp(3.25rem, 3vw + 2.25rem, 4.5rem);
+
+  /* ── Motion ── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+
+  --z-base:   1;
+  --z-sticky: 200;
+}
